@@ -4,6 +4,8 @@ import string
 import nltk
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
+nltk.download('stopwords')
+
 app = Flask(__name__)
 
 # load model
