@@ -5,6 +5,7 @@ import nltk
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
 
 nltk.download('stopwords')
+nltk.download('punkt')
 
 app = Flask(__name__)
 
