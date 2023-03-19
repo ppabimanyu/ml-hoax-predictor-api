@@ -2,3 +2,4 @@ flask==2.2.3
 joblib==1.1.1
 nltk==3.7
 sastrawi==1.0.1
+gunicorn==20.1.0
