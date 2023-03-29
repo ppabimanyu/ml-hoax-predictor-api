@@ -3,7 +3,7 @@ name: Flask CI/CD
 on:
   push:
     branches:
-      - main  # Ganti 'main' dengan nama cabang yang Anda gunakan jika berbeda
+      - main  # Brance
 
 jobs:
   build-and-test:
