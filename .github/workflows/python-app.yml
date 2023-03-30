@@ -40,7 +40,7 @@ jobs:
       run: |
         mkdir -p ~/.ssh
         chmod 700 ~/.ssh
-        echo "${{ secrets.SERVER_HOST_KEY }}" >> ~/.ssh/known_hosts
+        ssh-keyscan 178.128.98.173 >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
 
     - name: Deploy to Droplet
