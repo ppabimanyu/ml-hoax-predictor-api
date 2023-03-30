@@ -38,7 +38,10 @@ jobs:
       
     - name: Add server SSH key to known_hosts
       run: |
+        mkdir -p ~/.ssh
+        chmod 700 ~/.ssh
         echo "${{ secrets.SERVER_HOST_KEY }}" >> ~/.ssh/known_hosts
+        chmod 644 ~/.ssh/known_hosts
 
     - name: Deploy to Droplet
       run: |
