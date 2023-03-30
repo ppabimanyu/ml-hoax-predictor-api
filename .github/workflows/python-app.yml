@@ -55,10 +55,3 @@ jobs:
           ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd development/hoax-detector-api && docker compose up -d"
         env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
-
-      - name: Upload Nginx configuration
-        run: |
-          scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ./hoax_detector_nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/tmp/hoax-detector-api
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "mv /tmp/hoax-detector-api /etc/nginx/sites-available/ && ln -sf /etc/nginx/sites-available/hoax-detector-api /etc/nginx/sites-enabled/ && nginx -t && systemctl restart nginx"
-        env:
-          PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
