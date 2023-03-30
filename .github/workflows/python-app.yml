@@ -35,6 +35,10 @@ jobs:
     steps:
     - name: Checkout repository
       uses: actions/checkout@v2
+      
+    - name: Add server SSH key to known_hosts
+      run: |
+        echo "${{ secrets.SERVER_HOST_KEY }}" >> ~/.ssh/known_hosts
 
     - name: Deploy to Droplet
       run: |
