@@ -52,6 +52,6 @@ jobs:
       run: |
         echo "Deploying to server..."
         rsync -avz --delete --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' ./ abimanyu@178.128.98.173:development/hoax-detector-api
-        ssh abimanyu@178.128.98.173 "cd development/hoax-detector-api && docker-compose up -d"
+        ssh abimanyu@178.128.98.173 "cd development/hoax-detector-api && docker compose up -d"
       env:
         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
