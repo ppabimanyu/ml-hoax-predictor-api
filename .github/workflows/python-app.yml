@@ -42,6 +42,11 @@ jobs:
         chmod 700 ~/.ssh
         ssh-keyscan 178.128.98.173 >> ~/.ssh/known_hosts
         chmod 644 ~/.ssh/known_hosts
+        
+    - name: Set up SSH deployment key
+      run: |
+        echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+        chmod 600 ~/.ssh/id_rsa
 
     - name: Deploy to Droplet
       run: |
