@@ -59,6 +59,6 @@ jobs:
       - name: Upload Nginx configuration
         run: |
           scp -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ./hoax_detector_nginx.conf ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:/tmp/hoax-detector-api
-          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "sudo mv /tmp/hoax-detector-api /etc/nginx/sites-available/ && sudo ln -sf /etc/nginx/sites-available/hoax-detector-api /etc/nginx/sites-enabled/ && sudo nginx -t && sudo systemctl restart nginx"
+          ssh -o StrictHostKeyChecking=no -i ~/.ssh/id_rsa ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "mv /tmp/hoax-detector-api /etc/nginx/sites-available/ && ln -sf /etc/nginx/sites-available/hoax-detector-api /etc/nginx/sites-enabled/ && nginx -t && systemctl restart nginx"
         env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
