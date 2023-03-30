@@ -36,19 +36,10 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v2
 
-    - name: Set up Docker
-      run: |
-        sudo apt-get update
-        sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
-
-    - name: Build Docker image
-      run: docker compose build
-
     - name: Deploy to Droplet
       run: |
-        scp docker-compose.yml abimanyu@178.128.98.173:/development/hoax-detector-api
-        scp Dockerfile abimanyu@178.128.98.173:/development/hoax-detector-api
-        scp requirements.txt abimanyu@178.128.98.173:/development/hoax-detector-api
-        ssh abimanyu@178.128.98.173 "cd development/hoax-detector-api && docker compose up -d"
+        echo "Deploying to server..."
+        rsync -avz --delete --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' ./ abimanyu@178.128.98.173:/development/hoax-detector-api
+        ssh abimanyu@178.128.98.173 "cd /development/hoax-detector-api && docker-compose up -d"
       env:
         PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
