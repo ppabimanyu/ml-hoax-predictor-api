@@ -16,7 +16,9 @@ vectorizer = joblib.load('vectorizer_v14_data3000_split80-20_ngram1-3_modeFeatur
 # load index_feature_selected
 index_feature_selected = joblib.load('ifs_v14_data3000_split80-20_ngram1-3_modeFeatureSeletionOptimizeAlphaPSO.joblib')
 
-@app.route('/predict', methods=['POST'])
+apiVersion = '/api/v1'
+
+@app.route(f"{apiVersion}/predict", methods=['POST'])
 def predict():
     if request.method == 'POST':
         text = request.json['text']
