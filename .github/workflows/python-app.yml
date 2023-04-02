@@ -52,6 +52,6 @@ jobs:
         run: |
           echo "Deploying to server..."
           rsync -avz --delete --exclude '.git*' --exclude 'README.md' --exclude 'LICENSE' ./ ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }}:development/ml-hoax-detector-api
-          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd development/ml-hoax-detector-api && docker compose down && docker compose up -d"
+          ssh ${{ secrets.SERVER_USER }}@${{ secrets.SERVER_IP }} "cd development/ml-hoax-detector-api && docker compose down && docker image rm ml-hoax-detector-api-web && docker compose up -d"
         env:
           PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
