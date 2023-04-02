@@ -25,12 +25,15 @@ apiVersion = '/ml-api/v1'
 
 @app.route(f"{apiVersion}/predict", methods=['POST'])
 def predict():
-    # check screet key with screet key in .env
-    if request.headers['Authorization'].split(' ')[1] != os.getenv('SECRET_KEY'):
+    # check if Authorization header is set
+    auth = request.headers.get('Authorization')
+    if auth is None:
         return jsonify({
             'statusCode': 401,
             'error': 'Unauthorized',
-        })
+            'message': 'Authorization header is expected'
+            })
+    
 
     if request.method == 'POST':
         text = request.json['text']
