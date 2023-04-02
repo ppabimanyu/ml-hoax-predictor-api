@@ -20,6 +20,13 @@ apiVersion = '/ml-api/v1'
 
 @app.route(f"{apiVersion}/predict", methods=['POST'])
 def predict():
+    ip = str(request.remote_addr)
+    if ip != '178.128.98.173':
+        return jsonify({
+            'statusCode': 401,
+            'error': 'Unauthorized'
+        })
+
     if request.method == 'POST':
         text = request.json['text']
         cleaned_text = preprocess_text(text)
