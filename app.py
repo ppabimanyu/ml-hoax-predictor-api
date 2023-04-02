@@ -4,6 +4,10 @@ import joblib
 import string
 import nltk
 from Sastrawi.Stemmer.StemmerFactory import StemmerFactory
+from dotenv import load_dotenv
+
+# load .env
+load_dotenv()
 
 nltk.download('stopwords')
 nltk.download('punkt')
@@ -22,7 +26,7 @@ apiVersion = '/ml-api/v1'
 @app.route(f"{apiVersion}/predict", methods=['POST'])
 def predict():
     # check screet key with screet key in .env
-    if request.headers['Authorization'].split(' ')[1] != os.environ['APP_SECRET_KEY']:
+    if request.headers['Authorization'].split(' ')[1] != os.getenv('SECRET_KEY'):
         return jsonify({
             'statusCode': 401,
             'error': 'Unauthorized',
