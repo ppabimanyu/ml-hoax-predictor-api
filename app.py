@@ -1,3 +1,4 @@
+import os
 from flask import Flask, request, jsonify
 import joblib
 import string
@@ -20,11 +21,11 @@ apiVersion = '/ml-api/v1'
 
 @app.route(f"{apiVersion}/predict", methods=['POST'])
 def predict():
-    ip = str(request.remote_addr)
-    if ip != '178.128.98.173' or ip != 'localhost' or ip != '127.0.0.1':
+    # check screet key with screet key in .env
+    if request.headers['Authorization'].split(' ')[1] != os.environ['APP_SECRET_KEY']:
         return jsonify({
             'statusCode': 401,
-            'error': 'Unauthorized'
+            'error': 'Unauthorized',
         })
 
     if request.method == 'POST':
