@@ -15,11 +15,11 @@ nltk.download('punkt')
 app = Flask(__name__)
 
 # load model
-model = joblib.load('classifier_v14_data3000_split80-20_ngram1-3_modeFeatureSeletionOptimizeAlphaPSO.joblib')
+model = joblib.load('classifier_latest:v8.10_data[3000:v1]_split[80-20]_ngram[1-2]_modeNaiveBayes-Lidstone-FeatureSelection.joblib')
 # load vectorizer
-vectorizer = joblib.load('vectorizer_v14_data3000_split80-20_ngram1-3_modeFeatureSeletionOptimizeAlphaPSO.joblib')
+vectorizer = joblib.load('vectorizer_latest:v8.10_data[3000:v1]_split[80-20]_ngram[1-2]_modeNaiveBayes-Lidstone-FeatureSelection.joblib')
 # load index_feature_selected
-index_feature_selected = joblib.load('ifs_v14_data3000_split80-20_ngram1-3_modeFeatureSeletionOptimizeAlphaPSO.joblib')
+index_feature_selected = joblib.load('ifs_latest:v8.10_data[3000:v1]_split[80-20]_ngram[1-2]_modeNaiveBayes-Lidstone-FeatureSelection.joblib')
 
 apiVersion = '/ml-api/v1'
 
@@ -32,6 +32,12 @@ def predict():
             'statusCode': 401,
             'error': 'Unauthorized',
             'message': 'Authorization header is expected'
+            })
+    elif auth.split(' ')[1] != os.getenv('API_KEY'):
+        return jsonify({
+            'statusCode': 401,
+            'error': 'Unauthorized',
+            'message': 'Invalid API key'
             })
     
 
