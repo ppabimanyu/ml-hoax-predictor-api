@@ -1,5 +1,5 @@
 # Gunakan image Python sebagai dasar
-FROM python:3.9-slim
+FROM python:3.10.11-slim
 
 # Buat direktori kerja
 RUN mkdir -p /usr/src/app
